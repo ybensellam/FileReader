@@ -17,7 +17,7 @@ namespace FileReader.ConsoleApp
         public static string _basePath = ConfigurationManager.AppSettings["basePath"];
         public static string _adminFiles = ConfigurationManager.AppSettings["admin"];
         public static string _userFiles = ConfigurationManager.AppSettings["user"];
-        public static bool _encryptedFile =Convert.ToBoolean(ConfigurationManager.AppSettings["encryptedFile"]);
+        public static bool _encryptedFile = Convert.ToBoolean(ConfigurationManager.AppSettings["encryptedFile"]);
         static void Main(string[] args)
         {
             //Version1();
@@ -27,12 +27,13 @@ namespace FileReader.ConsoleApp
             //Version5();
             //Version6();
             //Version7();
-            Version8();
+            //Version8();
+            Version9();
         }
 
         private static void Version1()
         {
-            var textFileReader = new TextFileReader(_filePathV1,_basePath);
+            var textFileReader = new TextFileReader(_filePathV1, _basePath);
 
             Console.WriteLine(textFileReader.ReadTextFile(_encryptedFile));
             Console.ReadLine();
@@ -50,7 +51,7 @@ namespace FileReader.ConsoleApp
         }
         private static void Version3()
         {
-            var textFileReader = new TextFileReader(_filePathV1,_basePath);
+            var textFileReader = new TextFileReader(_filePathV1, _basePath);
 
             Console.WriteLine(textFileReader.ReadTextFile(_encryptedFile));
             Console.ReadLine();
@@ -119,7 +120,7 @@ namespace FileReader.ConsoleApp
         }
         private static void Version7()
         {
-            var jsonFileReader = new JsonFileReader(_filePathV3);
+            var jsonFileReader = new JsonFileReader(_filePathV3,"");
 
             var company = jsonFileReader.ReadJsonFile(_encryptedFile);
 
@@ -130,13 +131,34 @@ namespace FileReader.ConsoleApp
         }
         private static void Version8()
         {
-            var jsonFileReader = new JsonFileReader(_filePathV3);
+            var jsonFileReader = new JsonFileReader(_filePathV3,"");
 
             var company = jsonFileReader.ReadJsonFile(_encryptedFile);
 
             Console.WriteLine($"Name : {company.Name}");
             Console.WriteLine($"Location : {company.Location}");
 
+            Console.ReadLine();
+        }
+        private static void Version9()
+        {
+            string roleInput = string.Empty;
+            do
+            {
+                Console.WriteLine("Type your role : ");
+                roleInput = Console.ReadLine();
+            } while (!IsExistingRole(roleInput));
+
+            var files = ConfigurationManager.AppSettings[roleInput.ToLower()];
+
+            var jsonFileReader = new JsonFileReader(files,_basePath);
+
+            foreach (var item in jsonFileReader.ReadJsonFiles(files, _encryptedFile))
+            {
+                Console.WriteLine($"----------- FileName : {item.Key} ---------------");
+                Console.WriteLine($"Name : {item.Value.Name}");
+                Console.WriteLine($"Location : {item.Value.Location}");
+            }
             Console.ReadLine();
         }
         private static bool IsExistingRole(string roleInput)

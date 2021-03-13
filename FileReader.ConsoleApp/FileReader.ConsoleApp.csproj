@@ -49,6 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data\File1.json" />
+    <None Include="Data\File2.json" />
+    <None Include="Data\Ordina-v3.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FileReader.Library\FileReader.Library.csproj">
