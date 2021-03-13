@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileReader.ConsoleApp", "Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileReader.Library", "FileReader.Library\FileReader.Library.csproj", "{692D37D0-4721-4970-ACAE-955AE4AAD8AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileReader.Models", "FileReader.Models\FileReader.Models.csproj", "{C58B3E7B-2E26-4FFE-BD75-F470473F571B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{692D37D0-4721-4970-ACAE-955AE4AAD8AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{692D37D0-4721-4970-ACAE-955AE4AAD8AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{692D37D0-4721-4970-ACAE-955AE4AAD8AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C58B3E7B-2E26-4FFE-BD75-F470473F571B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C58B3E7B-2E26-4FFE-BD75-F470473F571B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C58B3E7B-2E26-4FFE-BD75-F470473F571B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C58B3E7B-2E26-4FFE-BD75-F470473F571B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

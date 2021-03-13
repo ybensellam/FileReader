@@ -55,9 +55,14 @@
       <Project>{692d37d0-4721-4970-acae-955ae4aad8af}</Project>
       <Name>FileReader.Library</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FileReader.Models\FileReader.Models.csproj">
+      <Project>{c58b3e7b-2e26-4ffe-bd75-f470473f571b}</Project>
+      <Name>FileReader.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\Ordina-v1.txt" />
+    <Content Include="Data\Ordina-v2.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

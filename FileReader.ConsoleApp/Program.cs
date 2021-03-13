@@ -1,4 +1,5 @@
 ﻿using FileReader.Library;
+using FileReader.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,13 +11,36 @@ namespace FileReader.ConsoleApp
 {
     class Program
     {
+        public static string _filePathV1 = ConfigurationManager.AppSettings["pathV1"];
+        public static string _filePathV2 = ConfigurationManager.AppSettings["pathV2"];
         static void Main(string[] args)
         {
-            var filePath = ConfigurationManager.AppSettings["pathV1"];
-            var textFileReader = new TextFileReader(filePath);
+            //Version1();
+            Version2();
+
+        }
+
+        private static void Version1()
+        {
+            var textFileReader = new TextFileReader(_filePathV1);
 
             Console.WriteLine(textFileReader.ReadTextFile());
             Console.ReadLine();
         }
+        private static void Version2()
+        {
+            var xmlFileReader = new XMLFileReader(_filePathV2);
+
+            var company = xmlFileReader.ReadXMlFile();
+
+            Console.WriteLine($"Name : {company.Name}");
+            Console.WriteLine($"Location : {company.Location}");
+
+            Console.ReadLine();
+        }
+
+
+
     }
 }
+
