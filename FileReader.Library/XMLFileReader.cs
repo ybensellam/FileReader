@@ -23,7 +23,6 @@ namespace FileReader.Library
 
         public Company ReadXMlFile()
         {
-
             XmlSerializer serializer = new XmlSerializer(typeof(Company));
 
             StreamReader reader = new StreamReader(FilePath);
@@ -33,7 +32,7 @@ namespace FileReader.Library
 
             return company;
         }
-        public Dictionary<string, Company> ReadXMlFiles(string fileNames)
+        public Dictionary<string, Company> ReadXMlFiles(string fileNames, bool isEncrypted)
         {
             Dictionary<string, Company> filesCompany = new Dictionary<string, Company>();
             var files = fileNames.Split(',');
@@ -45,9 +44,9 @@ namespace FileReader.Library
 
             foreach (var file in files)
             {
-                reader = new StreamReader(string.Format(BasePath,file));
+                reader = new StreamReader(string.Format(BasePath, file));
                 company = (Company)serializer.Deserialize(reader);
-                filesCompany.Add(file, company);
+                filesCompany.Add(file, isEncrypted ? Decrypter.DecryptCompany(company) : company);
                 reader.Close();
             }
             return filesCompany;

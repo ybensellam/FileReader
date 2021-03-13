@@ -27,10 +27,8 @@ namespace FileReader.Library
                     stringBuilder.AppendLine(line);
                 }
             }
-            return isEncrypted ? EncryptText(stringBuilder.ToString()) : stringBuilder.ToString();
+            return isEncrypted ? Decrypter.DecryptText(stringBuilder.ToString()) : stringBuilder.ToString();
         }
-        private string EncryptText(string text) =>  new string(text.Reverse().ToArray());
-
 
     }
 }

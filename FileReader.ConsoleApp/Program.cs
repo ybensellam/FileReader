@@ -14,21 +14,23 @@ namespace FileReader.ConsoleApp
         public static string _filePathV1 = ConfigurationManager.AppSettings["pathV1"];
         public static string _filePathV2 = ConfigurationManager.AppSettings["pathV2"];
         public static string _basePath = ConfigurationManager.AppSettings["basePath"];
-        public static string _adminFiles = ConfigurationManager.AppSettings["Admin"];
-        public static string _userFiles = ConfigurationManager.AppSettings["User"];
+        public static string _adminFiles = ConfigurationManager.AppSettings["admin"];
+        public static string _userFiles = ConfigurationManager.AppSettings["user"];
+        public static bool _encryptedFile =Convert.ToBoolean(ConfigurationManager.AppSettings["encryptedFile"]);
         static void Main(string[] args)
         {
             //Version1();
             //Version2();
             //Version3();
-            Version4();
+            //Version4();
+            Version5();
         }
 
         private static void Version1()
         {
             var textFileReader = new TextFileReader(_filePathV1);
 
-            Console.WriteLine(textFileReader.ReadTextFile(false));
+            Console.WriteLine(textFileReader.ReadTextFile(_encryptedFile));
             Console.ReadLine();
         }
         private static void Version2()
@@ -46,7 +48,7 @@ namespace FileReader.ConsoleApp
         {
             var textFileReader = new TextFileReader(_filePathV1);
 
-            Console.WriteLine(textFileReader.ReadTextFile(true));
+            Console.WriteLine(textFileReader.ReadTextFile(_encryptedFile));
             Console.ReadLine();
         }
         private static void Version4()
@@ -62,7 +64,28 @@ namespace FileReader.ConsoleApp
 
             var xmlFileReader = new XMLFileReader(_filePathV2, _basePath);
 
-            foreach (var item in xmlFileReader.ReadXMlFiles(files))
+            foreach (var item in xmlFileReader.ReadXMlFiles(files, _encryptedFile))
+            {
+                Console.WriteLine($"----------- FileName : {item.Key} ---------------");
+                Console.WriteLine($"Name : {item.Value.Name}");
+                Console.WriteLine($"Location : {item.Value.Location}");
+            }
+            Console.ReadLine();
+        }
+        private static void Version5()
+        {
+            string roleInput = string.Empty;
+            do
+            {
+                Console.WriteLine("Type your role : ");
+                roleInput = Console.ReadLine();
+            } while (!IsExistingRole(roleInput));
+
+            var files = ConfigurationManager.AppSettings[roleInput.ToLower()];
+
+            var xmlFileReader = new XMLFileReader(_filePathV2, _basePath);
+
+            foreach (var item in xmlFileReader.ReadXMlFiles(files, _encryptedFile))
             {
                 Console.WriteLine($"----------- FileName : {item.Key} ---------------");
                 Console.WriteLine($"Name : {item.Value.Name}");
