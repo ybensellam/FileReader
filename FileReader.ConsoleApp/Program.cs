@@ -23,12 +23,13 @@ namespace FileReader.ConsoleApp
             //Version2();
             //Version3();
             //Version4();
-            Version5();
+            //Version5();
+            Version6();
         }
 
         private static void Version1()
         {
-            var textFileReader = new TextFileReader(_filePathV1);
+            var textFileReader = new TextFileReader(_filePathV1,_basePath);
 
             Console.WriteLine(textFileReader.ReadTextFile(_encryptedFile));
             Console.ReadLine();
@@ -46,7 +47,7 @@ namespace FileReader.ConsoleApp
         }
         private static void Version3()
         {
-            var textFileReader = new TextFileReader(_filePathV1);
+            var textFileReader = new TextFileReader(_filePathV1,_basePath);
 
             Console.WriteLine(textFileReader.ReadTextFile(_encryptedFile));
             Console.ReadLine();
@@ -90,6 +91,26 @@ namespace FileReader.ConsoleApp
                 Console.WriteLine($"----------- FileName : {item.Key} ---------------");
                 Console.WriteLine($"Name : {item.Value.Name}");
                 Console.WriteLine($"Location : {item.Value.Location}");
+            }
+            Console.ReadLine();
+        }
+        private static void Version6()
+        {
+            string roleInput = string.Empty;
+            do
+            {
+                Console.WriteLine("Type your role : ");
+                roleInput = Console.ReadLine();
+            } while (!IsExistingRole(roleInput));
+
+            var files = ConfigurationManager.AppSettings[roleInput.ToLower()];
+
+            var textFileReader = new TextFileReader(files, _basePath);
+
+            foreach (var item in textFileReader.ReadTextFiles(files, _encryptedFile))
+            {
+                Console.WriteLine($"----------- FileName : {item.Key} ---------------");
+                Console.WriteLine($"Value : {item.Value}");
             }
             Console.ReadLine();
         }

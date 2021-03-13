@@ -35,7 +35,7 @@ namespace FileReader.Library
         public Dictionary<string, Company> ReadXMlFiles(string fileNames, bool isEncrypted)
         {
             Dictionary<string, Company> filesCompany = new Dictionary<string, Company>();
-            var files = fileNames.Split(',');
+            var files = fileNames.Split(',').Where(x=> x.Contains(".xml"));
 
             XmlSerializer serializer = new XmlSerializer(typeof(Company));
 

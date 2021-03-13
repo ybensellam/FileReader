@@ -61,7 +61,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\File1.txt" />
     <Content Include="Data\File1.xml" />
+    <Content Include="Data\File2.txt" />
     <Content Include="Data\File2.xml" />
     <Content Include="Data\File3.xml" />
     <Content Include="Data\File4.xml" />
