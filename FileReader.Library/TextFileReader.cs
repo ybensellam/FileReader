@@ -29,7 +29,6 @@ namespace FileReader.Library
             }
             return isEncrypted ? EncryptText(stringBuilder.ToString()) : stringBuilder.ToString();
         }
-        //private string EncryptText(string text) => text.Reverse().ToString();
         private string EncryptText(string text) =>  new string(text.Reverse().ToArray());
 
 
