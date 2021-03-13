@@ -13,11 +13,15 @@ namespace FileReader.ConsoleApp
     {
         public static string _filePathV1 = ConfigurationManager.AppSettings["pathV1"];
         public static string _filePathV2 = ConfigurationManager.AppSettings["pathV2"];
+        public static string _basePath = ConfigurationManager.AppSettings["basePath"];
+        public static string _adminFiles = ConfigurationManager.AppSettings["Admin"];
+        public static string _userFiles = ConfigurationManager.AppSettings["User"];
         static void Main(string[] args)
         {
             //Version1();
             //Version2();
-            Version3();
+            //Version3();
+            Version4();
         }
 
         private static void Version1()
@@ -29,7 +33,7 @@ namespace FileReader.ConsoleApp
         }
         private static void Version2()
         {
-            var xmlFileReader = new XMLFileReader(_filePathV2);
+            var xmlFileReader = new XMLFileReader(_filePathV2, _basePath);
 
             var company = xmlFileReader.ReadXMlFile();
 
@@ -44,6 +48,45 @@ namespace FileReader.ConsoleApp
 
             Console.WriteLine(textFileReader.ReadTextFile(true));
             Console.ReadLine();
+        }
+        private static void Version4()
+        {
+            string roleInput = string.Empty;
+            do
+            {
+                Console.WriteLine("Type your role : ");
+                roleInput = Console.ReadLine();
+            } while (!IsExistingRole(roleInput));
+
+            var files = ConfigurationManager.AppSettings[roleInput.ToLower()];
+
+            var xmlFileReader = new XMLFileReader(_filePathV2, _basePath);
+
+            foreach (var item in xmlFileReader.ReadXMlFiles(files))
+            {
+                Console.WriteLine($"----------- FileName : {item.Key} ---------------");
+                Console.WriteLine($"Name : {item.Value.Name}");
+                Console.WriteLine($"Location : {item.Value.Location}");
+            }
+            Console.ReadLine();
+        }
+        private static bool IsExistingRole(string roleInput)
+        {
+            bool correctRole = false;
+
+            switch (roleInput?.ToLower())
+            {
+                case "admin":
+                case "user":
+                    correctRole = true;
+                    break;
+                default:
+                    correctRole = false;
+                    Console.WriteLine("Unknown role");
+                    break;
+            }
+
+            return correctRole;
         }
     }
 }

@@ -61,6 +61,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\File1.xml" />
+    <Content Include="Data\File2.xml" />
+    <Content Include="Data\File3.xml" />
+    <Content Include="Data\File4.xml" />
     <Content Include="Data\Ordina-v1.txt" />
     <Content Include="Data\Ordina-v2.xml" />
   </ItemGroup>
