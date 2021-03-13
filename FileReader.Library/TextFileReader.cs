@@ -15,7 +15,7 @@ namespace FileReader.Library
             FilePath = filePath;
         }
 
-        public string ReadTextFile() 
+        public string ReadTextFile(bool isEncrypted)
         {
             var stringBuilder = new StringBuilder();
 
@@ -27,7 +27,11 @@ namespace FileReader.Library
                     stringBuilder.AppendLine(line);
                 }
             }
-            return stringBuilder.ToString();
+            return isEncrypted ? EncryptText(stringBuilder.ToString()) : stringBuilder.ToString();
         }
+        //private string EncryptText(string text) => text.Reverse().ToString();
+        private string EncryptText(string text) =>  new string(text.Reverse().ToArray());
+
+
     }
 }

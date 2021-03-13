@@ -16,15 +16,15 @@ namespace FileReader.ConsoleApp
         static void Main(string[] args)
         {
             //Version1();
-            Version2();
-
+            //Version2();
+            Version3();
         }
 
         private static void Version1()
         {
             var textFileReader = new TextFileReader(_filePathV1);
 
-            Console.WriteLine(textFileReader.ReadTextFile());
+            Console.WriteLine(textFileReader.ReadTextFile(false));
             Console.ReadLine();
         }
         private static void Version2()
@@ -38,9 +38,13 @@ namespace FileReader.ConsoleApp
 
             Console.ReadLine();
         }
+        private static void Version3()
+        {
+            var textFileReader = new TextFileReader(_filePathV1);
 
-
-
+            Console.WriteLine(textFileReader.ReadTextFile(true));
+            Console.ReadLine();
+        }
     }
 }
 
