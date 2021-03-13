@@ -13,6 +13,7 @@ namespace FileReader.ConsoleApp
     {
         public static string _filePathV1 = ConfigurationManager.AppSettings["pathV1"];
         public static string _filePathV2 = ConfigurationManager.AppSettings["pathV2"];
+        public static string _filePathV3 = ConfigurationManager.AppSettings["pathV3"];
         public static string _basePath = ConfigurationManager.AppSettings["basePath"];
         public static string _adminFiles = ConfigurationManager.AppSettings["admin"];
         public static string _userFiles = ConfigurationManager.AppSettings["user"];
@@ -24,7 +25,8 @@ namespace FileReader.ConsoleApp
             //Version3();
             //Version4();
             //Version5();
-            Version6();
+            //Version6();
+            Version7();
         }
 
         private static void Version1()
@@ -112,6 +114,17 @@ namespace FileReader.ConsoleApp
                 Console.WriteLine($"----------- FileName : {item.Key} ---------------");
                 Console.WriteLine($"Value : {item.Value}");
             }
+            Console.ReadLine();
+        }
+        private static void Version7()
+        {
+            var jsonFileReader = new JsonFileReader(_filePathV3);
+
+            var company = jsonFileReader.ReadJsonFile();
+
+            Console.WriteLine($"Name : {company.Name}");
+            Console.WriteLine($"Location : {company.Location}");
+
             Console.ReadLine();
         }
         private static bool IsExistingRole(string roleInput)
