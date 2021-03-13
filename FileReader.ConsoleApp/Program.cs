@@ -26,7 +26,8 @@ namespace FileReader.ConsoleApp
             //Version4();
             //Version5();
             //Version6();
-            Version7();
+            //Version7();
+            Version8();
         }
 
         private static void Version1()
@@ -120,7 +121,18 @@ namespace FileReader.ConsoleApp
         {
             var jsonFileReader = new JsonFileReader(_filePathV3);
 
-            var company = jsonFileReader.ReadJsonFile();
+            var company = jsonFileReader.ReadJsonFile(_encryptedFile);
+
+            Console.WriteLine($"Name : {company.Name}");
+            Console.WriteLine($"Location : {company.Location}");
+
+            Console.ReadLine();
+        }
+        private static void Version8()
+        {
+            var jsonFileReader = new JsonFileReader(_filePathV3);
+
+            var company = jsonFileReader.ReadJsonFile(_encryptedFile);
 
             Console.WriteLine($"Name : {company.Name}");
             Console.WriteLine($"Location : {company.Location}");

@@ -16,12 +16,12 @@ namespace FileReader.Library
         {
             FilePath = filePath;
         }
-        public Company ReadJsonFile()
+        public Company ReadJsonFile(bool isEncrypted)
         {
             using (StreamReader reader = new StreamReader(FilePath))
             {
                 string json = reader.ReadToEnd();
-                return JsonConvert.DeserializeObject<Company>(json);
+                return isEncrypted? Decrypter.DecryptCompany(JsonConvert.DeserializeObject<Company>(json)) : JsonConvert.DeserializeObject<Company>(json);
             }
         }
     }
